@@ -6,57 +6,76 @@
  */
 
 #include "Scan.h"
-#include<iostream>
-#include<queue>
-#include<string>
+#include <iostream>
+#include <queue>
+#include <string>
 using namespace std;
 
+/*************************************************
+  Description:    将键盘输入的待处理字符串，处理成规定的字符串队列
+  Input:          待处理字符串
+  Output:         
+  Return:         字符串队列
+  Others:         
+*************************************************/
 queue<string> Scan::ToStringQueue(string input)
 {
-    failed=0;
-    count=0;
-    string temp="";
-    for (int i=0;i<input.size();i++)
+    failed = 0;
+    count = 0;
+    string temp = "";
+    for (int i = 0 ; i < input.size() ; i++)
     {
-        if (input[i]>='0'&&input[i]<='9')
+        //get number
+        if (input[i] >= '0' && input[i] <= '9')
         {
-          temp+=input[i];//get number
-          count++;
-          if (count>10)
-          {
-            failed=1;
-            break;
-          }
+            temp += input[i];
+            count++;
+            //数字长度大于10
+            if (count > 10)
+            {
+                failed = 1;
+                break;
+            }
         }
         else
         {
-            if (input[i]=='.')//decimal
+            //处理小数
+            if (input[i] == '.')//decimal
             {
-                temp+='.';
+                temp += '.';
                 continue;
             }
-            if (temp!="")//number and operator
+            //数字＋运算符
+            //number and operator
+            if (temp != "")
             {
-              count=0;
-              s.push(temp);
-              temp=input[i];
-              s.push(temp);
-              temp="";
+                //压入数字
+                count = 0;
+                s.push(temp);
+                //压入运算符
+                temp = input[i];
+                s.push(temp);
+                temp = "";
+                //清空临时变量
             }
             else//continual operator
             {
-              temp=input[i];
-              s.push(temp);
-              temp="";
+                temp = input[i];
+                s.push(temp);
+                temp = "";
             }
         }
     }
-    if (temp!="")//last number
+    //last number
+    if (temp != "")
         s.push(temp);
+    //数字不符合要求
     if (failed)
-    {//failed
+    {
+        //清空队列
         while (s.size())
-          s.pop();
+            s.pop();
+        //压入错误信息
         s.push("Error!!!!!!!!!!!!!!!!!!");
     }
     return s;

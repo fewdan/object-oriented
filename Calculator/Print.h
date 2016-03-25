@@ -7,9 +7,9 @@
 
 #ifndef PRINT_H
 #define	PRINT_H
-#include<iostream>
-#include<string>
-#include<queue>
+#include <iostream>
+#include <string>
+#include <queue>
 using namespace std;
 
 class Print {
