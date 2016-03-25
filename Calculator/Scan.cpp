@@ -25,12 +25,12 @@ queue<string> Scan::ToStringQueue(string input)
     string temp = "";
     for (int i = 0 ; i < input.size() ; i++)
     {
-        //get number
+        /* get number */
         if (input[i] >= '0' && input[i] <= '9')
         {
             temp += input[i];
             count++;
-            //数字长度大于10
+            /* 数字长度大于10 */
             if (count > 10)
             {
                 failed = 1;
@@ -39,43 +39,44 @@ queue<string> Scan::ToStringQueue(string input)
         }
         else
         {
-            //处理小数
+            /* 处理小数 */
             if (input[i] == '.')//decimal
             {
                 temp += '.';
                 continue;
             }
-            //数字＋运算符
-            //number and operator
+            /* 数字＋运算符
+               number and operator  */
             if (temp != "")
             {
-                //压入数字
+                /* 压入数字 */
                 count = 0;
                 s.push(temp);
-                //压入运算符
+                /* 压入运算符 */
                 temp = input[i];
                 s.push(temp);
                 temp = "";
-                //清空临时变量
+                /* 清空临时变量 */
             }
-            else//continual operator
+            else
             {
+                /* continual operator */
                 temp = input[i];
                 s.push(temp);
                 temp = "";
             }
         }
     }
-    //last number
+    /* last number */
     if (temp != "")
         s.push(temp);
-    //数字不符合要求
+    /* 数字不符合要求 */
     if (failed)
     {
-        //清空队列
+        /* 清空队列 */
         while (s.size())
             s.pop();
-        //压入错误信息
+        /* 压入错误信息 */
         s.push("Error!!!!!!!!!!!!!!!!!!");
     }
     return s;
