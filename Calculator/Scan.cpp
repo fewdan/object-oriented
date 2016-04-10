@@ -20,9 +20,28 @@ using namespace std;
 *************************************************/
 queue<string> Scan::ToStringQueue(string input)
 {
+    /* 处理多余括号情况 */
+    int kh = 0;
+    for (int i = 0; i < input.size() ; i++)
+        if (input[i]=='(')
+            kh++;
+        else if (input[i]==')')
+            kh--;
+    while (kh > 0)
+    {
+        input += ")";
+        kh--;
+    }
+    while (kh < 0)
+    {
+        input = "(" + input;
+        kh++;
+    }
     failed = 0;
     count = 0;
+    bool negative = 0;
     string temp = "";
+    input = input + "#";
     for (int i = 0 ; i < input.size() ; i++)
     {
         /* get number */
@@ -45,31 +64,62 @@ queue<string> Scan::ToStringQueue(string input)
                 temp += '.';
                 continue;
             }
+            if (input[i] == '-')
+            {
+                if (i==0)
+                {
+                    negative = 1;
+                }
+                else if ((!(input[i-1]>='0' && input[i-1]<='9')) &&(input[i-1]!=')'))
+                {
+                    negative = 1;
+                }
+            }
             /* 数字＋运算符
                number and operator  */
             if (temp != "")
             {
-                /* 压入数字 */
-                count = 0;
-                s.push(temp);
-                /* 压入运算符 */
-                temp = input[i];
-                s.push(temp);
-                temp = "";
-                /* 清空临时变量 */
+                if (negative == 0)
+                {
+                    /* 压入数字 */
+                    count = 0;
+                    s.push(temp);
+                    /* 压入运算符 */
+                    temp = input[i];
+                    s.push(temp);
+                    temp = "";
+                    /* 清空临时变量 */
+                }
+                else
+                {
+                    negative = 0;
+                    temp = "-" + temp;
+                    count = 0;
+                    s.push(temp);
+                    temp = input[i];
+                    s.push(temp);
+                    temp = "";
+                }
             }
             else
             {
                 /* continual operator */
-                temp = input[i];
-                s.push(temp);
-                temp = "";
+                if (!negative)
+                {
+                    temp = input[i];
+                    s.push(temp);
+                    temp = "";
+                }
             }
         }
     }
     /* last number */
     if (temp != "")
+    {
+        if (negative)
+            temp="-"+temp;
         s.push(temp);
+    }
     /* 数字不符合要求 */
     if (failed)
     {
