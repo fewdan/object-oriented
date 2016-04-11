@@ -17,6 +17,7 @@ int main (int argc,char* argv[])
 {
     /* temp_s存待计算表达式 */
     string temp_s;
+    //cin>>temp_s;
     temp_s=argv[argc-1];
     if (argc==3)
         cout<<temp_s<<"= ";

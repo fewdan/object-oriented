@@ -49,7 +49,7 @@ void Calculation::work (queue<string> str)
 {
     double temp_num;
     operators.push ('#');
-    //num.push(0);
+    num.push(0);
     while (str.front()!="#" || operators.top()!='#')
     {
         if ( (str.front()[0] >= '0' && str.front()[0] <= '9')||
@@ -77,6 +77,7 @@ void Calculation::work (queue<string> str)
                 char ch=operators.top();
                 operators.pop();
                 num.push(calc(num1,num2,ch));
+                //cout<<num1<<ch<<num2<<" "<<calc(num1,num2,ch)<<endl;
             }
             else if (priority == '=')
             {
@@ -85,5 +86,7 @@ void Calculation::work (queue<string> str)
             }
         }
     }
+    if (num.top()==-0)
+        num.top()=0;
     cout<<num.top()<<endl;
 }

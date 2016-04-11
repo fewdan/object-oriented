@@ -66,11 +66,11 @@ queue<string> Scan::ToStringQueue(string input)
             }
             if (input[i] == '-')
             {
-                if (i==0)
+                if (i==0 && (input[i+1] >= '0' && input[i+1] <= '9'))
                 {
                     negative = 1;
                 }
-                else if ((!(input[i-1]>='0' && input[i-1]<='9')) &&(input[i-1]!=')'))
+                else if ((i !=0 ) && (!(input[i-1]>='0' && input[i-1]<='9')) &&(input[i-1]!=')'))
                 {
                     negative = 1;
                 }
