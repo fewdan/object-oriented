@@ -37,6 +37,16 @@ queue<string> Scan::ToStringQueue(string input)
         input = "(" + input;
         kh++;
     }
+    for (int i = 1 ; i < input.size() - 1 ; i++)
+    {
+        if (input[i]=='-' && input[i-1]=='(' && input[i+1]=='(')
+        {
+            string temp1,temp2;
+            temp1=input.substr(0,i);
+            temp2=input.substr(i,input.size()-i);
+            input=temp1+"0"+temp2;
+        }
+    }
     failed = 0;
     count = 0;
     bool negative = 0;
