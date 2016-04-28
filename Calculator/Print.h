@@ -12,8 +12,10 @@
 #include <queue>
 using namespace std;
 
-class Print {
+class Print
+{
 public:
+    /* 输出原表达式得到的队列 */
     void Myprint (queue<string>s);
 };
 

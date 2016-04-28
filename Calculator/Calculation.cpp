@@ -15,26 +15,71 @@
 using namespace std;
 
 /*  返回运算符在优先级数组中的位置  */
-int Calculation::myconvert(char ch)
+int Calculation::myconvert (char ch)
 {
-    if (ch == '+') return 0;
-    if (ch == '-') return 1;
-    if (ch == '*') return 2;
-    if (ch == '/') return 3;
-    if (ch == '^') return 4;
-    if (ch == '(') return 5;
-    if (ch == ')') return 6;
-    if (ch == '#') return 7;
+    switch ( ch )
+    {
+        case '+' :
+        {
+            return 0;
+        }
+        case '-' :
+        {
+            return 1;
+        }
+        case '*' :
+        {
+            return 2;
+        }
+        case '/' :
+        {
+            return 3;
+        }
+        case '^' :
+        {
+            return 4;
+        }
+        case '(' :
+        {
+            return 5;
+        }
+        case ')' :
+        {
+            return 6;
+        }
+        case '#' :
+        {
+            return 7;
+        }
+    }
 }
 
 /*  计算基本的表达式  */
 double Calculation::calc(double num1,double num2,char ch)
 {
-    if (ch == '+') return num1+num2;
-    if (ch == '-') return num1-num2;
-    if (ch == '*') return num1*num2;
-    if (ch == '/') return num1/num2;
-    if (ch == '^') return (double)pow((double)num1,(double)num2);
+    switch ( ch )
+    {
+        case '+' :
+        {
+            return num1+num2;
+        }
+        case '-' :
+        {
+            return num1-num2;
+        }
+        case '*' :
+        {
+            return num1*num2;
+        }
+        case '/' :
+        {
+            return num1/num2;
+        }
+        case '^' :
+        {
+            return (double)pow((double)num1,(double)num2);
+        }
+    }
 }
 
 /*  string 转 double  */
@@ -48,10 +93,12 @@ void Calculation::strtoint (double &int_temp,const string &string_temp)
 void Calculation::work (queue<string> str)
 {
     double temp_num;
-    operators.push ('#');
-    num.push(0);
-    while (str.front()!="#" || operators.top()!='#')
+    operators.push ('#');//操作符栈空标志
+    num.push(0);//处理第一个负数
+    while ( str.front() != "#" || operators.top() != '#' )
     {
+        //扫描字符队列
+        //数字进栈
         if ( (str.front()[0] >= '0' && str.front()[0] <= '9')||
            (str.front()[1] >= '0' && str.front()[1] <= '9') )
         {
@@ -61,32 +108,34 @@ void Calculation::work (queue<string> str)
         }
         else
         {
+            //处理操作符
             char priority;
-            priority=pre[myconvert(operators.top())][myconvert(str.front()[0])];
-            if (priority == '<')
+            priority = pre[myconvert(operators.top())][myconvert(str.front()[0])];
+            if ( priority == '<' )
             {
                 operators.push(str.front()[0]);
                 str.pop();
             }
-            else if (priority == '>')
+            else if ( priority == '>' )
             {
-                double num2=num.top();
+                double num2 = num.top();
                 num.pop();
-                double num1=num.top();
+                double num1 = num.top();
                 num.pop();
-                char ch=operators.top();
+                char ch = operators.top();
                 operators.pop();
                 num.push(calc(num1,num2,ch));
                 //cout<<num1<<ch<<num2<<" "<<calc(num1,num2,ch)<<endl;
             }
-            else if (priority == '=')
+            else if ( priority == '=' )
             {
                 operators.pop();
                 str.pop();
             }
         }
     }
-    if (num.top()==-0)
-        num.top()=0;
+    /* 某些情况可能出现答案为－0 */
+    if (num.top() == -0)
+        num.top() = 0;
     cout<<num.top()<<endl;
 }

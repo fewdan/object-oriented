@@ -18,9 +18,9 @@ using namespace std;
   Return:         
   Others:         
 *************************************************/
-void Print::Myprint(queue<string>s)
+void Print::Myprint( queue<string>s )
 {
-    while (s.size())
+    while ( s.size() )
     {
         cout<<s.front()<<endl;
         s.pop();

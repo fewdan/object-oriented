@@ -18,33 +18,39 @@ using namespace std;
   Return:         字符串队列
   Others:         
 *************************************************/
-queue<string> Scan::ToStringQueue(string input)
+queue<string> Scan::ToStringQueue (string input)
 {
     /* 处理多余括号情况 */
     int kh = 0;
-    for (int i = 0; i < input.size() ; i++)
-        if (input[i]=='(')
+    for ( int i = 0; i < input.size() ; i++)
+        if ( input[i] == '(' )
+        {
             kh++;
-        else if (input[i]==')')
+        }
+        else if ( input[i]==')' )
+        {
             kh--;
-    while (kh > 0)
+        }
+    while ( kh > 0)
     {
         input += ")";
         kh--;
     }
-    while (kh < 0)
+    while ( kh < 0)
     {
         input = "(" + input;
         kh++;
     }
-    for (int i = 1 ; i < input.size() - 1 ; i++)
+    //括号处理完毕
+    /* 处理类似(-())的情况 */
+    for ( int i = 1 ; i < input.size() - 1 ; i++)
     {
-        if (input[i]=='-' && input[i-1]=='(' && input[i+1]=='(')
+        if ( input[i] == '-' && input[i-1] == '(' && input[i+1] == '(')
         {
             string temp1,temp2;
-            temp1=input.substr(0,i);
-            temp2=input.substr(i,input.size()-i);
-            input=temp1+"0"+temp2;
+            temp1 = input.substr(0,i);
+            temp2 = input.substr(i,input.size()-i);
+            input = temp1 + "0" + temp2;
         }
     }
     failed = 0;
@@ -52,15 +58,15 @@ queue<string> Scan::ToStringQueue(string input)
     bool negative = 0;
     string temp = "";
     input = input + "#";
-    for (int i = 0 ; i < input.size() ; i++)
+    for ( int i = 0 ; i < input.size() ; i++)
     {
         /* get number */
-        if (input[i] >= '0' && input[i] <= '9')
+        if ( input[i] >= '0' && input[i] <= '9' )
         {
             temp += input[i];
             count++;
             /* 数字长度大于10 */
-            if (count > 10)
+            if ( count > 10 )
             {
                 failed = 1;
                 break;
@@ -69,27 +75,27 @@ queue<string> Scan::ToStringQueue(string input)
         else
         {
             /* 处理小数 */
-            if (input[i] == '.')//decimal
+            if ( input[i] == '.' )//decimal
             {
                 temp += '.';
                 continue;
             }
-            if (input[i] == '-')
+            if ( input[i] == '-' )
             {
-                if (i==0 && (input[i+1] >= '0' && input[i+1] <= '9'))
+                if ( i==0 && (input[i+1] >= '0' && input[i+1] <= '9') )
                 {
                     negative = 1;
                 }
-                else if ((i !=0 ) && (!(input[i-1]>='0' && input[i-1]<='9')) &&(input[i-1]!=')'))
+                else if ( (i !=0 ) && (!(input[i-1]>='0' && input[i-1]<='9')) &&(input[i-1]!=')') )
                 {
                     negative = 1;
                 }
             }
             /* 数字＋运算符
                number and operator  */
-            if (temp != "")
+            if ( temp != "" )
             {
-                if (negative == 0)
+                if ( negative == 0 )
                 {
                     /* 压入数字 */
                     count = 0;
@@ -114,7 +120,7 @@ queue<string> Scan::ToStringQueue(string input)
             else
             {
                 /* continual operator */
-                if (!negative)
+                if ( !negative )
                 {
                     temp = input[i];
                     s.push(temp);
@@ -124,17 +130,17 @@ queue<string> Scan::ToStringQueue(string input)
         }
     }
     /* last number */
-    if (temp != "")
+    if ( temp != "" )
     {
-        if (negative)
+        if ( negative )
             temp="-"+temp;
         s.push(temp);
     }
     /* 数字不符合要求 */
-    if (failed)
+    if ( failed )
     {
         /* 清空队列 */
-        while (s.size())
+        while ( s.size() )
             s.pop();
         /* 压入错误信息 */
         s.push("Error!!!!!!!!!!!!!!!!!!");

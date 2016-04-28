@@ -17,18 +17,17 @@ int main (int argc,char* argv[])
 {
     /* temp_s存待计算表达式 */
     string temp_s;
-    //cin>>temp_s;
-    temp_s=argv[argc-1];
-    if (argc==3)
+    temp_s = argv[argc-1];
+    if ( argc == 3 )
+    {
         cout<<temp_s<<"= ";
+    }
     /* 输入类 */
-    Scan IN;
-    /* 输出类 */
-    Print OUT;
+    Scan Myscan;
+
     /* 中间变量，传递字符串队列 */
     queue<string>tempqueue;
-    tempqueue=IN.ToStringQueue(temp_s);
-    //OUT.Myprint(tempqueue);
+    tempqueue = Myscan.ToStringQueue(temp_s);
     
     Calculation calc;
     calc.work(tempqueue);

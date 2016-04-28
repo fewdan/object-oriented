@@ -15,7 +15,8 @@
 #include <queue>
 using namespace std;
 
-class Calculation {
+class Calculation
+{
 public:
     /*  返回运算符在优先级数组中的位置  */
     int myconvert (char op);
