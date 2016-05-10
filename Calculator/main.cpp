@@ -40,7 +40,7 @@ int main (int argc,char* argv[])
         
         while ( !fin.eof() )
         {
-            fin >> temp_s;
+            getline (fin,temp_s,'\n');
             tempqueue = Myscan.ToStringQueue (temp_s);
             result = calc.work(tempqueue);
             Myprint.print_file(Result_filRe,result);
