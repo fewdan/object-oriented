@@ -20,37 +20,21 @@ int Calculation::myconvert (char ch)
     switch ( ch )
     {
         case '+' :
-        {
             return 0;
-        }
         case '-' :
-        {
             return 1;
-        }
         case '*' :
-        {
             return 2;
-        }
         case '/' :
-        {
             return 3;
-        }
         case '^' :
-        {
             return 4;
-        }
         case '(' :
-        {
             return 5;
-        }
         case ')' :
-        {
             return 6;
-        }
         case '#' :
-        {
             return 7;
-        }
     }
 }
 
@@ -60,25 +44,15 @@ double Calculation::calc(double num1,double num2,char ch)
     switch ( ch )
     {
         case '+' :
-        {
             return num1+num2;
-        }
         case '-' :
-        {
             return num1-num2;
-        }
         case '*' :
-        {
             return num1*num2;
-        }
         case '/' :
-        {
             return num1/num2;
-        }
         case '^' :
-        {
             return (double)pow((double)num1,(double)num2);
-        }
     }
 }
 
@@ -90,7 +64,7 @@ void Calculation::strtoint (double &int_temp,const string &string_temp)
 }
 
 /*  计算表达式的主体函数  */
-void Calculation::work (queue<string> str)
+int Calculation::work (queue<string> str)
 {
     double temp_num;
     operators.push ('#');//操作符栈空标志
@@ -137,5 +111,5 @@ void Calculation::work (queue<string> str)
     /* 某些情况可能出现答案为－0 */
     if (num.top() == -0)
         num.top() = 0;
-    cout<<num.top()<<endl;
+    return ( num.top() );
 }

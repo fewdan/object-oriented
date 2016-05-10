@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include <queue>
+#include <fstream>
 #include "Scan.h"
 #include "Print.h"
 #include "Calculation.h"
@@ -15,21 +16,47 @@ using namespace std;
 
 int main (int argc,char* argv[])
 {
-    /* temp_s存待计算表达式 */
     string temp_s;
-    temp_s = argv[argc-1];
-    if ( argc == 3 )
-    {
-        cout<<temp_s<<"= ";
-    }
-    /* 输入类 */
     Scan Myscan;
-
-    /* 中间变量，传递字符串队列 */
+    Print Myprint;
     queue<string>tempqueue;
-    tempqueue = Myscan.ToStringQueue(temp_s);
-    
     Calculation calc;
-    calc.work(tempqueue);
+    int result;
+     
+    if ( strcmp(argv[1],"-f") == 0 )
+    {
+        ifstream fin;
+        string Text_file = argv[argc-2];
+        string Result_filRe = argv[argc-1];
+        
+        fin.open ( Text_file.c_str() , ios::in);
+        
+        while ( !fin.eof() )
+        {
+            fin >> temp_s;
+            tempqueue = Myscan.ToStringQueue (temp_s);
+            result = calc.work(tempqueue);
+            Myprint.print_file(Result_filRe,result);
+        }
+        fin.close();
+    }
+    else
+    {
+        if ( strcmp(argv[1],"-a") == 0 )
+        {
+            temp_s=argv[2];
+            tempqueue = Myscan.ToStringQueue (temp_s);
+            result = calc.work(tempqueue);
+            Myprint.print_full_s(temp_s);
+            Myprint.printans(result);
+        }
+        else
+        {
+            temp_s=argv[1];
+            tempqueue = Myscan.ToStringQueue (temp_s);
+            result = calc.work(tempqueue);
+            Myprint.printans(result);
+        }
+    }
     return 0;
 }

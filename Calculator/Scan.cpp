@@ -11,6 +11,9 @@
 #include <string>
 using namespace std;
 
+/*  最大合法字符长度  */
+#define maxlength 10
+
 /*************************************************
   Description:    将键盘输入的待处理字符串，处理成规定的字符串队列
   Input:          待处理字符串
@@ -45,6 +48,10 @@ queue<string> Scan::ToStringQueue (string input)
     /* 处理类似(-())的情况 */
     for ( int i = 1 ; i < input.size() - 1 ; i++)
     {
+        if ( input[i] == '=' )
+        {
+            break;
+        }
         if ( input[i] == '-' && input[i-1] == '(' && input[i+1] == '(')
         {
             string temp1,temp2;
@@ -66,7 +73,7 @@ queue<string> Scan::ToStringQueue (string input)
             temp += input[i];
             count++;
             /* 数字长度大于10 */
-            if ( count > 10 )
+            if ( count > maxlength )
             {
                 failed = 1;
                 break;

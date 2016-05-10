@@ -25,7 +25,7 @@ public:
     /*  string 转 double  */
     void strtoint (double &int_temp,const string &string_temp);
     /*  计算表达式的主体函数  */
-    void work (queue<string> str);
+    int work (queue<string> str);
 private:
     /* 数字栈与操作符栈 */
     stack<double> num;

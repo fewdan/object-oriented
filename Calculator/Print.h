@@ -17,6 +17,9 @@ class Print
 public:
     /* 输出原表达式得到的队列 */
     void Myprint (queue<string>s);
+    void printans (int ans);
+    void print_file (string s,int ans);
+    void print_full_s (string s);
 };
 
 #endif	/* PRINT_H */

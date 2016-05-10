@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <queue>
+#include <fstream>
 using namespace std;
 
 /*************************************************
@@ -22,8 +23,26 @@ void Print::Myprint( queue<string>s )
 {
     while ( s.size() )
     {
-        cout<<s.front()<<endl;
+        cout << s.front() << endl;
         s.pop();
     }
 }
 
+/*  输出答案函数  */
+void Print::printans ( int ans )
+{
+    cout<< ans << endl;
+}
+
+void Print::print_file (string s,int ans)
+{
+    ofstream fout;
+    fout.open ( s.c_str() , ios::out);
+    fout << ans << endl;
+    fout.close();
+}
+
+void Print::print_full_s (string s)
+{
+    cout << s << " ";
+}
