@@ -32,20 +32,7 @@ int main (int argc,char* argv[])
     if ( strcmp(argv[1],"-f") == 0 )
     {
         /*  文件输出结果  */
-        ifstream fin;
-        string Text_file = argv[argc-2];
-        string Result_filRe = argv[argc-1];
-        
-        fin.open ( Text_file.c_str() , ios::in);
-        
-        while ( !fin.eof() )
-        {
-            getline (fin,temp_s,'\n');
-            tempqueue = Myscan.ToStringQueue (temp_s);
-            result = calc.work(tempqueue);
-            Myprint.print_file(Result_filRe,result);
-        }
-        fin.close();
+        Myprint.print_file (Text_file,Result_file);
     }
     else
     {
