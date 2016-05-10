@@ -23,6 +23,11 @@ using namespace std;
 *************************************************/
 queue<string> Scan::ToStringQueue (string input)
 {
+    /*  初始化  */
+    while ( s.size() )
+    {
+        s.pop();
+    }
     /*  将最后面的等于号删除  */
     string temp;
     temp = input.substr(0,input.size()-1);

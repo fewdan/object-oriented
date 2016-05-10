@@ -66,6 +66,15 @@ void Calculation::strtoint (double &int_temp,const string &string_temp)
 /*  计算表达式的主体函数  */
 int Calculation::work (queue<string> str)
 {
+    /*  初始化  */
+    while ( num.size() )
+    {
+        num.pop();
+    }
+    while ( operators.size() )
+    {
+        operators.pop();
+    }
     double temp_num;
     operators.push ('#');//操作符栈空标志
     num.push(0);//处理第一个负数

@@ -6,6 +6,8 @@
  */
 
 #include "Print.h"
+#include "Scan.h"
+#include "Calculation.h"
 #include <iostream>
 #include <string>
 #include <queue>
@@ -35,11 +37,27 @@ void Print::printans ( int ans )
 }
 
 /*  文件输出答案  */
-void Print::print_file (string s,int ans)
+void Print::print_file (string s1,string s2)
 {
+
+    ifstream fin;
     ofstream fout;
-    fout.open ( s.c_str() , ios::out);
-    fout << ans << endl;
+        
+    fin.open ( s1.c_str() , ios::in);
+    fout.open ( s2.c_str() , ios::out);    
+    while ( !fin.eof() )
+    {
+        string temp_s;
+        Scan Myscan;
+        queue<string>tempqueue;
+        Calculation calc;
+        int result;
+        getline (fin,temp_s,'\n');
+        tempqueue = Myscan.ToStringQueue (temp_s);
+        result = calc.work(tempqueue);
+        fout << result << endl;
+    }
+    fin.close();
     fout.close();
 }
 
