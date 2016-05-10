@@ -16,15 +16,22 @@ using namespace std;
 
 int main (int argc,char* argv[])
 {
+    /*  临时表达式  */
     string temp_s;
+    /*  处理类得到队列  */
     Scan Myscan;
+    /*  输出类  */
     Print Myprint;
+    /*  临时队列  */
     queue<string>tempqueue;
+    /*  计算类  */
     Calculation calc;
+    /*  答案变量  */
     int result;
      
     if ( strcmp(argv[1],"-f") == 0 )
     {
+        /*  文件输出结果  */
         ifstream fin;
         string Text_file = argv[argc-2];
         string Result_filRe = argv[argc-1];
@@ -42,6 +49,7 @@ int main (int argc,char* argv[])
     }
     else
     {
+        /*  输出表达式及结果  */
         if ( strcmp(argv[1],"-a") == 0 )
         {
             temp_s=argv[2];
@@ -50,6 +58,7 @@ int main (int argc,char* argv[])
             Myprint.print_full_s(temp_s);
             Myprint.printans(result);
         }
+        /*  只输出结果  */
         else
         {
             temp_s=argv[1];

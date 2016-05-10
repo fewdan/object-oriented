@@ -34,6 +34,7 @@ void Print::printans ( int ans )
     cout<< ans << endl;
 }
 
+/*  文件输出答案  */
 void Print::print_file (string s,int ans)
 {
     ofstream fout;
@@ -42,6 +43,7 @@ void Print::print_file (string s,int ans)
     fout.close();
 }
 
+/*  输出原本表达式  */
 void Print::print_full_s (string s)
 {
     cout << s << " ";

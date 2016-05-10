@@ -23,6 +23,10 @@ using namespace std;
 *************************************************/
 queue<string> Scan::ToStringQueue (string input)
 {
+    /*  将最后面的等于号删除  */
+    string temp;
+    temp = input.substr(0,input.size()-1);
+    input = temp;
     /* 处理多余括号情况 */
     int kh = 0;
     for ( int i = 0; i < input.size() ; i++)
@@ -48,10 +52,6 @@ queue<string> Scan::ToStringQueue (string input)
     /* 处理类似(-())的情况 */
     for ( int i = 1 ; i < input.size() - 1 ; i++)
     {
-        if ( input[i] == '=' )
-        {
-            break;
-        }
         if ( input[i] == '-' && input[i-1] == '(' && input[i+1] == '(')
         {
             string temp1,temp2;
@@ -63,7 +63,7 @@ queue<string> Scan::ToStringQueue (string input)
     failed = 0;
     count = 0;
     bool negative = 0;
-    string temp = "";
+    temp = "";
     input = input + "#";
     for ( int i = 0 ; i < input.size() ; i++)
     {
