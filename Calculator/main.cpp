@@ -32,6 +32,8 @@ int main (int argc,char* argv[])
     if ( strcmp(argv[1],"-f") == 0 )
     {
         /*  文件输出结果  */
+        string Text_file = argv[2];
+        string Result_file = argv[3];
         Myprint.print_file (Text_file,Result_file);
     }
     else
