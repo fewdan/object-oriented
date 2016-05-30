@@ -154,8 +154,9 @@ queue<string> Scan::ToStringQueue (string input)
         /* 清空队列 */
         while ( s.size() )
             s.pop();
-        /* 压入错误信息 */
-        s.push("Error!!!!!!!!!!!!!!!!!!");
+        /* 压入错误信息 出错时输出Error 同时输出0 */
+        s.push("0");
+        cout<<"Error!!!!!"<<" ";
     }
     return s;
 }

@@ -64,7 +64,7 @@ void Calculation::strtoint (double &int_temp,const string &string_temp)
 }
 
 /*  计算表达式的主体函数  */
-int Calculation::work (queue<string> str)
+double Calculation::work (queue<string> str)
 {
     /*  初始化  */
     while ( num.size() )

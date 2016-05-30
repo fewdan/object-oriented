@@ -31,7 +31,7 @@ void Print::Myprint( queue<string>s )
 }
 
 /*  输出答案函数  */
-void Print::printans ( int ans )
+void Print::printans ( double ans )
 {
     cout<< ans << endl;
 }

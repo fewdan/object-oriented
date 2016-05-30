@@ -27,7 +27,7 @@ int main (int argc,char* argv[])
     /*  计算类  */
     Calculation calc;
     /*  答案变量  */
-    int result;
+    double result;
      
     if ( strcmp(argv[1],"-f") == 0 )
     {
